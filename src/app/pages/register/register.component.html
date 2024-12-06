@@ -1,0 +1,56 @@
+<main class='max-w-7xl mx-auto flex items-center min-h-screen gap-20'>
+    <div class='w-1/2'>
+        <img src='/assets/login.svg' alt='register' />
+    </div>
+    <div class='w-1/2'>
+        <form [formGroup]="registerForm" (ngSubmit)="handleRegister()">
+            <section class="flex flex-col">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" type="email"
+                    class="h-12 rounded-md px-4 outline-blue-400 border border-blue-300 mt-2" placeholder="Email" />
+                <div class="h-6">
+                    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                        class="text-red-600">
+                        <small *ngIf="registerForm.get('email')?.hasError('required')">Email is required.</small>
+                        <small *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format.</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex flex-col">
+                <label for="username">UserName</label>
+                <input id="username" formControlName="username" type="username"
+                    class="h-12 rounded-md px-4 outline-blue-400 border border-blue-300 mt-2" placeholder="Username" />
+                <div class="h-6">
+                    <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+                        class="text-red-600">
+                        <small *ngIf="registerForm.get('username')?.hasError('required')">Username is required.</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex flex-col">
+                <label for="password">Password</label>
+                <input id="password" formControlName="password" type="password"
+                    class="h-12 rounded-md px-4 outline-blue-400 border border-blue-300 mt-2" placeholder="Password" />
+
+                <div class="h-6">
+                    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                        class="text-red-600">
+                        <small *ngIf="registerForm.get('password')?.hasError('required')">Password is required.</small>
+                        <small *ngIf="registerForm.get('password')?.hasError('minlength')">Password must be at least 6
+                            characters
+                            long.</small>
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" [disabled]="registerForm.invalid"
+                class="bg-blue-500 text-white rounded-md py-2 mt-2 w-full">Login</button>
+        </form>
+
+        <p class="mt-2">Bạn đã có tài khoản?
+            <a routerLink="/login" class='text-blue-600 cursor-pointer'>Đăng nhập ngay.</a>
+        </p>
+    </div>
+</main>
