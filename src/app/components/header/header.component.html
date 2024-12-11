@@ -87,44 +87,53 @@
 
         </div>
     </section>
-    <!-- <section class='bg-primary'>
+    <section class='bg-primary'>
         <div class='flex items-center text-white mx-auto font-semibold max-w-7xl capitalize'>
-            <div className='flex gap-3 items-center hover:bg-primaryBold  py-5 cursor-pointer px-6 transitionPrimary relative group'>
+            <div
+                class='flex gap-3 items-center hover:bg-primaryBold  py-5 cursor-pointer px-6 transitionPrimary relative group'>
                 <p>Tất cả danh mục</p>
-                <IoIosArrowDown />
-                <div className='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
-                    <Link to='/' className='block'>Trang chủ</Link>
-                    <Link to='/products' className='block my-4'>Bán chạy nhất</Link>
-                    <Link to='/' className='block'>Giảm giá hàng tuần</Link>
+                <fa-icon [icon]="icons.angleDownIcon" />
+                <div
+                    class='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
+                    <a routerLink='/' class='block'>Trang chủ</a>
+                    <a routerLink='/products' class='block my-4'>Bán chạy nhất</a>
+                    <a routerLink='/' class='block'>Giảm giá hàng tuần</a>
                 </div>
             </div>
-            <div className={`flex gap-3 items-center ${location.pathname === '/' ? 'bg-primaryBold' : 'hover:bg-primaryBold'}  py-5 cursor-pointer px-6 transitionPrimary relative group`}>
-                <Link to='/'>Trang chủ</Link>
-                <IoIosArrowDown />
-                <div className='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
-                    <Link to='/' className='block'>Trang chủ</Link>
+            <div [ngClass]="{'flex gap-3 items-center hover:bg-primaryBold  py-5 cursor-pointer px-6 transitionPrimary relative group':true,
+                    'bg-primaryBold': currentPath === '/',
+                    'hover:bg-primaryBold': currentPath !== '/',
+                 }">
+                <p>Trang chủ</p>
+                <fa-icon [icon]="icons.angleDownIcon" />
+                <div
+                    class='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
+                    <a routerLink='/' class='block'>Trang chủ</a>
                 </div>
             </div>
 
-            <div className='flex gap-3 items-center hover:bg-primaryBold  py-5 cursor-pointer px-6 transitionPrimary relative group'>
+            <div
+                class='flex gap-3 items-center hover:bg-primaryBold  py-5 cursor-pointer px-6 transitionPrimary relative group'>
                 <p>Tác giả</p>
-                <IoIosArrowDown />
-                <div className='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
-                    <p to='/' className='block'>Tác giả</p>
+                <fa-icon [icon]="icons.angleDownIcon" />
+                <div
+                    class='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
+                    <p to='/' class='block'>Tác giả</p>
                 </div>
             </div>
 
-            <Link
-                to="/products"
-                className={`px-6 py-5 cursor-pointer transitionPrimary ${location.pathname === '/products' ? 'bg-primaryBold' : 'hover:bg-primaryBold'
-                    }`}
-            >
-                Bán chạy nhất
-            </Link>
-            <p className='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Giảm giá hàng tuần</p>
-            {!user.isLogin && <Link to='/login' className='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Đăng nhập</Link>}
-            {!user.isLogin && <Link to='/register' className='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Đăng kí</Link>}
-            <p className='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Liên hệ</p>
+            <a routerLink="/products" [ngClass]="{'px-6 py-5 cursor-pointer transitionPrimary':true,
+                  'bg-primaryBold': currentPath === '/products',
+                  'hover:bg-primaryBold': currentPath !== '/products',
+                    }">
+                Sản phẩm
+            </a>
+            <p class='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Giảm giá hàng tuần</p>
+            <a *ngIf="!username" routerLink='/login'
+                class='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Đăng nhập</a>
+            <a *ngIf="!username" routerLink='/register'
+                class='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Đăng ký</a>
+            <p class='px-6 transitionPrimary hover:bg-primaryBold py-5 cursor-pointer'>Liên hệ</p>
         </div>
-    </section> -->
+    </section>
 </header>

@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "ng-angular-popup": "^0.6.2",
     "rxjs": "~7.8.0",
+    "swiper": "^11.1.15",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

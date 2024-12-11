@@ -5,7 +5,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { NgToastService } from 'ng-angular-popup';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +27,7 @@ export class HeaderComponent {
   public isShowProfile: boolean = false
   public isShowCart: boolean = false
 
-  constructor(private userService: UserService, private toast: NgToastService) { }
+  constructor(private userService: UserService, private toast: NgToastService, private router: Router) { }
 
   public username = this.userService.getUsernameFromSessionStorage()
   public cartItems = this.userService.getCartFromSessionStorate()
@@ -37,6 +37,10 @@ export class HeaderComponent {
 
   public toggleShowCart() {
     this.isShowCart = !this.isShowCart
+  }
+
+  get currentPath(): string {
+    return this.router.url;
   }
 
   public handleLogout() {
