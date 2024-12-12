@@ -32,6 +32,7 @@ export class UserService {
   public removeUserFromSessionStorage() {
     sessionStorage.removeItem("accessToken")
     sessionStorage.removeItem("user")
+    sessionStorage.removeItem("cart")
   }
 
   public getUsernameFromSessionStorage() {

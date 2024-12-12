@@ -42,17 +42,41 @@ export class CardProductComponent {
       return
     }
 
-    this.cartItems$.pipe(take(1)).subscribe(cartItems => {
-      // Kiểm tra nếu product đã tồn tại trong cartItems
-      const productExists = cartItems?.some(item => item.id === this.product.id);
+    // this.cartItems$.pipe(take(1)).subscribe(cartItems => {
+    //   // Kiểm tra nếu product đã tồn tại trong cartItems
+    //   const productExists = cartItems?.some(item => item.id === this.product.id);
 
-      if (!productExists) {
-        console.log("Product is not in cart. Adding...");
-        this.store.dispatch(addItem({ item: this.product })); // Dispatch action thêm sản phẩm
-      } else {
-        this.toast.danger("Product already in cart");
-      }
-    });
+    //   if (!productExists) {
+    //     console.log("Product is not in cart. Adding...");
+    //     this.store.dispatch(addItem({ item: this.product })); // Dispatch action thêm sản phẩm
+    //     // Hàm lấy cart từ session và thêm product và bỏ lại vào session
+    //   } else {
+    //     this.toast.danger("Product already in cart");
+    //   }
+    // });
+
+    // Lấy giỏ hàng hiện tại từ sessionStorage
+    const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+
+    // Kiểm tra nếu sản phẩm đã tồn tại
+    const productIndex = cart.findIndex((item: any) => item.id == this.product.id);
+    if (productIndex !== -1) {
+      // console.log('Product is already in the cart.');
+      this.toast.danger("Product is already in the cart");
+      return;
+    }
+
+    // Thêm sản phẩm vào giỏ hàng
+    cart.push(this.product);
+
+    // Lưu giỏ hàng vào sessionStorage
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+
+    // Dispatch action thêm sản phẩm
+    this.store.dispatch(addItem({ item: this.product }));
+
+    this.toast.success("Product added to cart");
+    console.log('Product added to session cart:', this.product);
   }
 
 

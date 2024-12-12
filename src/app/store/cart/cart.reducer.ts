@@ -6,7 +6,7 @@ export interface CartState {
 }
 
 export const initialState: CartState = {
-    items: [],
+    items: JSON.parse(sessionStorage.getItem('cart') || '[]'),
 };
 
 export const cartReducer = createReducer(
