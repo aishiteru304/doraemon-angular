@@ -2,15 +2,14 @@
 <div class='pt-10 max-w-7xl mx-auto'>
     <section class='pb-10'>
 
-        <div *ngIf="products.length>0" class="relative">
-            <swiper-container #swiperRef navigation="false" [slidesPerView]="5" [spaceBetween]="20" [loop]="true"
-                class="pt-32">
+        <div *ngIf="products.length>0" class="relative pt-32 z-0">
+            <swiper-container #swiperRef navigation="false" [slidesPerView]="5" [spaceBetween]="20" [loop]="true">
                 <swiper-slide *ngFor="let product of products" class="py-4">
                     <app-card-product [product]="product" />
                 </swiper-slide>
             </swiper-container>
             <div
-                class='flex border-border border-b py-5 absolute top-0 w-full justify-between pr-[104px] items-end z-20'>
+                class='flex border-border border-b py-5 absolute top-0 w-full justify-between pr-[104px] items-end z-10'>
                 <div>
                     <h3 class=' capitalize'>Lựa chọn của mọi người</h3>
                     <h3 class=' capitalize text-textBold text-3xl'>Sách bán chạy nhất</h3>
@@ -19,7 +18,7 @@
                     class='h-10 rounded-full px-4 text-text text-sm transitionPrimary border border-border hover:text-white hover:bg-primary'>Xem
                     tất cả</button>
             </div>
-            <div class='flex gap-2 absolute right-2 top-10 z-20'>
+            <div class='flex gap-2 absolute right-2 top-10 z-10'>
                 <div (click)="swiperRef.swiper.slidePrev()"
                     class="custom-prev w-10 h-10 rounded-full border-border border flex text-text items-center justify-center cursor-pointer transitionPrimary hover:text-white hover:bg-primary">
                     <fa-icon [icon]="icons.angleLeftIcon" />

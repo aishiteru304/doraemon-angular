@@ -23,7 +23,7 @@
     </a>
     <h4 class='line-clamp-1 mt-2 text-text text-sm hover:text-primary2 transitionPrimary'>{{product.author.name}}</h4>
     <p class='text-primary font-medium'>{{product.price.toLocaleString('vi-VN')}} đ</p>
-    <div
+    <div (click)="handleAddToCart()"
         class='border-border border rounded-full flex gap-2 justify-center items-center py-1 text-text cursor-default mt-3 transitionPrimary hover:bg-primary hover:text-white'>
         <fa-icon [icon]="icons.cartIcon" />
         <p class=' capitalize'>Thêm vào giỏ</p>

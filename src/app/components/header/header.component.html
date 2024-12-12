@@ -52,33 +52,27 @@
                 <p class='font-semibold text-base text-textBold'>Giỏ hàng</p>
                 <div *ngIf="username"
                     class='w-5 h-5 rounded-full flex items-center justify-center text-white bg-primary4 text-sm font-medium absolute left-4 -top-2'>
-                    {{cartItems.length}}</div>
+                    {{ cartLength$ | async }}</div>
                 <div *ngIf="username" [ngClass]="{
-                    'absolute border-t-2 border-primary p-4 bg-white w-[330px] top-10 right-0 transitionPrimary text-text text-sm shadow-lg': true,
+                    'absolute z-30 border-t-2 border-primary p-4 bg-white w-[330px] top-10 right-0 transitionPrimary text-text text-sm shadow-lg': true,
                     'opacity-100 visibility-visible translate-y-0 pointer-events-auto': isShowCart,
                     'opacity-0 visibility-hidden translate-y-10 pointer-events-none': !isShowCart
                   }">
 
-                    <p *ngIf="cartItems.length == 0">Không có sản phẩm nào trong giỏ hàng!</p>
-                    <div *ngIf="cartItems.length != 0">
-                        <div *ngFor="let item of cartItems.slice(0, 3); let i = index"
+                    <p *ngIf="(cartLength$ | async) == 0">Không có sản phẩm nào trong giỏ hàng!</p>
+
+                    <div *ngIf="(cartLength$ | async) != 0">
+                        <div *ngFor="let item of (cartItems$ | async)?.slice(0, 3); let i = index"
                             class="border-b border-border pb-5">
-                            <!-- <app-item-cart-card [book]="item"></app-item-cart-card> -->
+                            <app-cart-item [item]="item" />
                         </div>
-                        <!-- {cartItems.length > 3 && (
-                        <div class="text-center text-text border-b pb-3 border-border">...</div>
-                        )} -->
-                        <!-- <h4 class='text-right my-4 text-text font-normal'>Tổng tiền: <span
-                                class='text-textBold font-medium'>
-                                {cartItems.reduce((total, item) => {
-                                return total + item.price * item.quantity;
-                                }, 0).toLocaleString('vi-VN')} VND</span></h4>
-                        <div class='flex justify-between'>
-                            <Link to="/cartItem" class='bg-primary text-white px-5 py-2 rounded-md'>Xem giỏ hàng</Link>
-                            <Link to="/checkout"
+                        <div class='flex justify-between mt-2'>
+                            <a routerLink="/cart-item" class='bg-primary text-white px-5 py-2 rounded-md'>Xem giỏ
+                                hàng</a>
+                            <a routerLink="/checkout"
                                 class='border text-text border-border px-5 py-2 rounded-md transitionPrimary hover:text-white hover:bg-primary'>
-                            Thanh toán</Link>
-                        </div> -->
+                                Thanh toán</a>
+                        </div>
                     </div>
 
                 </div>
@@ -95,7 +89,7 @@
                 <fa-icon [icon]="icons.angleDownIcon" />
                 <div
                     class='absolute p-4 bg-white w-full min-w-[200px] top-16 left-0 opacity-0 visibility-hidden translate-y-10 group-hover:opacity-100 group-hover:visibility-visible group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto text-text text-sm shadow-lg'>
-                    <a routerLink='/' class='block'>Trang chủ</a>
+                    <a routera='/' class='block'>Trang chủ</a>
                     <a routerLink='/products' class='block my-4'>Bán chạy nhất</a>
                     <a routerLink='/' class='block'>Giảm giá hàng tuần</a>
                 </div>
