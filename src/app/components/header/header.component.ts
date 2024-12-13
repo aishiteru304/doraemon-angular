@@ -42,7 +42,6 @@ export class HeaderComponent {
   }
 
   public username = this.userService.getUsernameFromSessionStorage()
-  public cartItems = this.userService.getCartFromSessionStorate()
   public toggleShowProfile() {
     this.isShowProfile = !this.isShowProfile
   }

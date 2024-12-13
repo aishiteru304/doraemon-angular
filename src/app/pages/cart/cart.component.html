@@ -1,1 +1,65 @@
-<p>cart works!</p>
+<section class='my-10 mx-auto max-w-7xl'>
+    <div class="table-container">
+        <p *ngIf="(cartLength$ | async) == 0" class="text-center">Không có sản phẩm nào trong giỏ hàng!</p>
+
+        <table *ngIf="(cartLength$ | async) != 0" mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+
+            <!-- Image Column -->
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef> Image </th>
+                <td mat-cell *matCellDef="let element"> <img src="{{element.image}}" alt="image" class="w-20 my-2" />
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+            </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.price}}</td>
+            </ng-container>
+
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element">
+                    <input type="number" min="1" [(ngModel)]="element.quantity"
+                        (ngModelChange)="onQuantityChange(element)"
+                        class="border border-primary outline-none py-1 pl-3 pr-1 w-20 rounded-md" />
+                </td>
+            </ng-container>
+
+            <!-- Amount Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element">{{element.price*element.quantity}}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button class="bg-red-600 text-white py-2 px-2 rounded-md"
+                        (click)="handleDelete(element)">Delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+
+    </div>
+
+    <li *ngIf="(cartLength$ | async) != 0" class='text-right mr-[200px] mt-5'>Tổng đơn hàng:
+        <span class='ml-2 p-2 bg-[#777777] rounded-3xl text-white'>{{(totalPrice().toLocaleString('vi-VN'))}} VND</span>
+    </li>
+    <div *ngIf="(cartLength$ | async) != 0" class='flex gap-5 justify-end mr-[200px] mt-5 text-primary'>
+        <a routerLink='/checkout'>Thanh toán</a>
+        <a routerLink='/products'>Tiếp tục mua sắm</a>
+    </div>
+</section>

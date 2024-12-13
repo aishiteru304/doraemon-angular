@@ -66,17 +66,18 @@ export class CardProductComponent {
       return;
     }
 
+    const cartItem = { ...this.product, quantity: 1 }
+
     // Thêm sản phẩm vào giỏ hàng
-    cart.push(this.product);
+    cart.push(cartItem);
 
     // Lưu giỏ hàng vào sessionStorage
     sessionStorage.setItem('cart', JSON.stringify(cart));
 
     // Dispatch action thêm sản phẩm
-    this.store.dispatch(addItem({ item: this.product }));
+    this.store.dispatch(addItem({ item: cartItem }));
 
     this.toast.success("Product added to cart");
-    console.log('Product added to session cart:', this.product);
   }
 
 
