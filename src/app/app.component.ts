@@ -5,7 +5,7 @@ import { NgToastModule } from 'ng-angular-popup';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgToastModule],
+  imports: [NgToastModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

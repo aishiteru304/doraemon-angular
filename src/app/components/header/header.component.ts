@@ -58,7 +58,6 @@ export class HeaderComponent {
   public handleLogout() {
     this.userService.logout().subscribe({
       next: (res: any) => {
-        this.toast.success(res?.message)
         this.userService.removeUserFromSessionStorage()
         window.location.href = "/"
       },
