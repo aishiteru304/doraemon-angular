@@ -1,0 +1,98 @@
+<div class="my-20 max-w-7xl mx-auto">
+    <h2 class="text-3xl text-textBold pb-5 border-b border-border">Đặt Hàng</h2>
+    <div class="grid grid-cols-2 gap-10 mt-10">
+
+        <div class=" p-4 border rounded-lg shadow-lg">
+            <h2 class="text-lg font-semibold mb-4">Sản Phẩm</h2>
+            <table *ngIf="(cartLength$ | async) != 0" mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef> Price </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price}}</td>
+                </ng-container>
+
+                <!-- Quantity Column -->
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                    <td mat-cell *matCellDef="let element">
+                        <input [value]="element.quantity" disabled
+                            class="border border-primary outline-none py-1 pl-3 pr-1 w-10 rounded-md" />
+                    </td>
+                </ng-container>
+
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <li *ngIf="(cartLength$ | async) != 0" class='text-right mr-20 mt-5'>Tổng đơn hàng:
+                <span class='ml-2 p-2 bg-[#777777] rounded-3xl text-white'>{{(totalPrice().toLocaleString('vi-VN'))}}
+                    VND</span>
+            </li>
+
+            <h2 class="text-lg font-semibold mt-6 mb-2">Chọn Phương Thức Thanh Toán</h2>
+            <div class="flex flex-col gap-2">
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="payment" value="paypal" class="w-4 h-4 border-gray-300" checked
+                        disabled />
+                    <span>Thanh Toán Với Sandbox Vnpay</span>
+                </label>
+            </div>
+        </div>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="handleCheckout()">
+            <section class="flex flex-col">
+                <label for="name">Name Receiver</label>
+                <input id="name" formControlName="name" type="name"
+                    class="h-12 rounded-md px-4 outline-blue-400 border border-blue-300 mt-2"
+                    placeholder="Name receiver" />
+                <div class="h-6">
+                    <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched"
+                        class="text-red-600">
+                        <small *ngIf="checkoutForm.get('name')?.hasError('required')">Name is required.</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex flex-col">
+                <label for="address">Address Receiver</label>
+                <input id="address" formControlName="address" type="address"
+                    class="h-12 rounded-md px-4 outline-blue-400 border border-blue-300 mt-2"
+                    placeholder="Address receiver" />
+                <div class="h-6">
+                    <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched"
+                        class="text-red-600">
+                        <small *ngIf="checkoutForm.get('address')?.hasError('required')">Address is required.</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex flex-col">
+                <label for="phone">Phone Receiver</label>
+                <input id="phone" formControlName="phone" type="phone"
+                    class="h-12 rounded-md px-4 outline-blue-400 border border-blue-300 mt-2"
+                    placeholder="Phone receiver" />
+                <div class="h-6">
+                    <div *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched"
+                        class="text-red-600">
+                        <small *ngIf="checkoutForm.get('phone')?.hasError('required')">Phone is required.</small>
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" [disabled]="checkoutForm.invalid"
+                class="bg-blue-500 text-white rounded-md py-2 mt-2 w-full">Confirm</button>
+        </form>
+
+    </div>
+</div>

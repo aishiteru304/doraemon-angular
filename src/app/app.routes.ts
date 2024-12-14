@@ -6,6 +6,7 @@ import { authGuard } from './guards/auth.guard';
 import { CartComponent } from './pages/cart/cart.component';
 import { privateGuard } from './guards/private.guard';
 import { MainLayoutComponent } from './components/layouts/main-layout/main-layout.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
         children: [
             { path: '', component: HomeComponent },
             { path: 'cart', component: CartComponent, canActivate: [privateGuard] },
+            { path: 'checkout', component: CheckoutComponent, canActivate: [privateGuard] },
         ],
     },
 ];
