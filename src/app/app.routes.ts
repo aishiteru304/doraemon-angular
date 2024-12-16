@@ -7,6 +7,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { privateGuard } from './guards/private.guard';
 import { MainLayoutComponent } from './components/layouts/main-layout/main-layout.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrderComponent } from './pages/order/order.component';
 
 
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'cart', component: CartComponent, canActivate: [privateGuard] },
             { path: 'checkout', component: CheckoutComponent, canActivate: [privateGuard] },
+            { path: 'order', component: OrderComponent, canActivate: [privateGuard] },
         ],
     },
 ];

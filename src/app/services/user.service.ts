@@ -47,4 +47,8 @@ export class UserService {
     return JSON.parse(cart)
   }
 
+  public removeCartFromSessionStorate() {
+    sessionStorage.removeItem("cart")
+  }
+
 }
